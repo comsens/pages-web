@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Diversity — midnight-signal</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #111827; }
+    .deck { width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; }
+    .slide { display: none; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(var(--slide-scale, 1)); transform-origin: center; box-shadow: 0 30px 90px rgba(0,0,0,.38); }
+    .slide.active { display: block; }
+  </style>
+<meta name="webeditor-html-sizing" content="auto-height"><meta name="webeditor-canvas-size" content="1920x1080"><style data-editor-print-fit="">/* ——— editor print hookup ——— */
+@page {
+  size: 1920px 1080px;
+  margin: 0;
+}
+@media print {
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    /* Author CSS routinely sets overflow:hidden + height:100% on html/body
+     * for one-slide-per-viewport playback. In print that truncates everything
+     * past the first slide — force the document to flow so all slides
+     * paginate naturally. */
+    height: auto !important;
+    overflow: visible !important;
+    width: auto !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* Slide wrappers — .deck, .stage, deck-stage, .slides, etc. — typically
+   * lock the viewport to one slide via flex centering + overflow:hidden.
+   * Releasing them to block flow is what actually lets every .slide
+   * paginate; without this, only the first slide ever reaches the printer
+   * even when display:flex is forced on .slide itself. */
+  .deck, .stage, .deck-stage, deck-stage, .slides, .slide-container,
+  body > section:not(.slide), body > main, body > div {
+    display: block !important;
+    height: auto !important;
+    width: auto !important;
+    max-height: none !important;
+    max-width: none !important;
+    overflow: visible !important;
+    position: static !important;
+    transform: none !important;
+    align-items: initial !important;
+    justify-content: initial !important;
+  }
+  /* Decks uniformly hide non-active slides with display:none + opacity:0 +
+   * absolute centering, expecting JS we never run to reveal them. Force
+   * every .slide visible and back into flow so page-break-after gives one
+   * slide per page instead of a single blank page. */
+  .slide, .page, body > section, body > * > section {
+    display: flex !important;
+    flex-direction: column !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    animation: none !important;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin: 0 !important;
+    box-shadow: none !important;
+    /* Hold the intrinsic slide size so print layout matches the editor. */
+    width: 1920px !important;
+    height: 1080px !important;
+    min-width: 1920px !important;
+    min-height: 1080px !important;
+    max-width: 1920px !important;
+    max-height: 1080px !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+  }
+  .slide:last-child, .page:last-child, body > section:last-child, body > * > section:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+  /* Animations frozen — fadeIn etc. otherwise stick at opacity:0 on slides
+   * past the first. */
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}</style></head>
+<body data-template-pack="midnight-signal" data-template-license="project-built-in">
+  <div class="deck">
+
+<section class="slide active dd-slide dd-cover" data-editor-slide="true" data-template-pack="midnight-signal" data-screen-label="Cover" style="--dd-bg:linear-gradient(135deg, #090d1a 0%, #17133b 100%);--dd-surface:rgba(255,255,255,.08);--dd-text:#f5f7ff;--dd-muted:#aab2d5;--dd-accent:#67e8f9;--dd-accent-2:#a78bfa;--dd-border:rgba(255,255,255,.16);--dd-radius:28px;width:1920px;height:1080px;padding:84px 92px;overflow:hidden;position:absolute;background:var(--dd-bg);color:var(--dd-text);font-family:'Inter', 'Pretendard', system-ui, sans-serif;box-sizing:border-box">
+  <div style="position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; z-index: 1; transform: translate(0px, 0px);">
+    <div style="display:flex;align-items:center;justify-content:space-between;font-family:inherit;font-size:18px;letter-spacing:.16em;text-transform:uppercase;color:var(--dd-muted)">
+      <strong style="color:var(--dd-accent)">SIGNAL / 2026</strong><span>01 / 03</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1.45fr 0.55fr; align-items: end; gap: 90px; flex: 1 1 0%; transform: translate(-52.4px, -28.1px);">
+      <div>
+        <div style="width:96px;height:10px;background:var(--dd-accent);margin-bottom:38px"></div>
+        <h1 style="font:inherit;font-size:104px;line-height:1.02;letter-spacing:-.055em;margin:0 0 34px;max-width:1160px">Make the idea<br><span style="color:var(--dd-accent)">impossible to miss.</span></h1>
+        <p style="font:inherit;font-size:27px;line-height:1.55;color:var(--dd-muted);margin:0;max-width:850px">A structured presentation system for clear decisions, memorable stories and confident delivery.</p>
+      </div>
+      <div style="height:390px;border:1px solid var(--dd-border);border-radius:var(--dd-radius);background:var(--dd-surface);padding:34px;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box">
+        <span style="font-size:17px;color:var(--dd-muted)">DESIGN SYSTEM</span>
+        <div><div style="font-size:76px;font-weight:800;color:var(--dd-accent)">04</div><div style="font-size:22px;color:var(--dd-muted)">coordinated layouts</div></div>
+      </div>
+    </div>
+  </div>
+<svg data-shape="connector" data-connector-kind="straight" data-connector-from="n_60" data-connector-from-site="bottom" data-connector-from-x="695.6" data-connector-from-y="428.6" data-connector-to-x="895.6" data-connector-to-y="428.6" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 683.6px; top: 416.6px; width: 224px; height: 25px; color: rgb(17, 17, 17); stroke: rgb(17, 17, 17); fill: rgb(17, 17, 17); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; z-index: 8; transform: translate(0px, 0px);"><defs><marker id="arrow-line-n_68" viewBox="0 0 10 10" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" refX="9" refY="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="miter" stroke-linecap="round"></path></marker><marker id="arrow-triangle-n_68" viewBox="0 0 10 10" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" refX="9" refY="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="currentColor"></path></marker><marker id="arrow-reversed-triangle-n_68" viewBox="0 0 10 10" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" refX="10" refY="5" orient="auto-start-reverse"><path d="M 10 0 L 0 5 L 10 10 Z" fill="currentColor"></path></marker><marker id="arrow-circle-n_68" viewBox="0 0 10 10" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" refX="0" refY="5" orient="auto-start-reverse"><circle cx="5" cy="5" r="4" fill="currentColor"></circle></marker><marker id="arrow-diamond-n_68" viewBox="0 0 10 10" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" refX="0" refY="5" orient="auto-start-reverse"><polygon points="5,0 10,5 5,10 0,5" fill="currentColor"></polygon></marker></defs><path data-connector-path="true" d="M 12 12 L 212 12" fill="none"></path></svg><svg data-shape="connector" data-connector-kind="straight" data-connector-from-x="657.3" data-connector-from-y="389.2" data-connector-to-x="857.3" data-connector-to-y="389.2" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 645.3px; top: 377.2px; width: 224px; height: 25px; color: rgb(17, 17, 17); stroke: rgb(234, 179, 8); fill: rgb(17, 17, 17); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; z-index: 10; transform: translate(450.653px, -208.126px);"><defs><marker id="arrow-line-n_70" viewBox="0 0 10 10" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" refX="9" refY="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="miter" stroke-linecap="round"></path></marker><marker id="arrow-triangle-n_70" viewBox="0 0 10 10" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" refX="9" refY="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="currentColor"></path></marker><marker id="arrow-reversed-triangle-n_70" viewBox="0 0 10 10" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" refX="10" refY="5" orient="auto-start-reverse"><path d="M 10 0 L 0 5 L 10 10 Z" fill="currentColor"></path></marker><marker id="arrow-circle-n_70" viewBox="0 0 10 10" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" refX="0" refY="5" orient="auto-start-reverse"><circle cx="5" cy="5" r="4" fill="currentColor"></circle></marker><marker id="arrow-diamond-n_70" viewBox="0 0 10 10" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" refX="0" refY="5" orient="auto-start-reverse"><polygon points="5,0 10,5 5,10 0,5" fill="currentColor"></polygon></marker></defs><path data-connector-path="true" d="M 12 12 L 212 12" fill="none"></path></svg><svg data-shape="pen" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 1167.1px; top: 256.9px; width: 129.3px; height: 139.6px; stroke: rgb(239, 68, 68); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; z-index: 13; transform: translate(0px, 0px);"><path d="M 61.2 32.5 Q 29.1 48.6 21.1 57.2 Q 13.0 65.8 9.0 84.1 Q 5.0 102.5 6.1 109.9 Q 7.3 117.4 11.9 123.7 Q 16.5 130.0 23.9 132.3 Q 31.4 134.6 48.6 134.6 Q 65.8 134.6 84.7 125.4 Q 103.6 116.2 112.2 107.6 Q 120.8 99.0 122.5 73.2 Q 124.3 47.4 117.4 33.7 Q 110.5 19.9 103.0 15.9 Q 95.6 11.9 77.2 9.0 Q 58.9 6.1 46.9 5.6 L 34.8 5.0"></path></svg><svg data-shape="pen" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 1350.6px; top: 223.7px; width: 41px; height: 284.1px; stroke: rgb(239, 68, 68); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; z-index: 14; transform: translate(0px, 0px);"><path d="M 36.0 5.0 Q 33.7 5.0 33.7 14.2 Q 33.7 23.3 31.4 41.7 Q 29.1 60.0 17.0 146.6 Q 5.0 233.2 5.0 256.1 Q 5.0 279.1 6.1 279.1 Q 7.3 279.1 11.3 266.4 L 15.3 253.8"></path></svg><svg data-shape="pen" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 1495.1px; top: 187px; width: 19.2px; height: 26.1px; stroke: rgb(239, 68, 68); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; z-index: 15; transform: translate(0px, 0px);"><path d="M 5.0 5.0 Q 5.0 11.9 9.6 16.5 L 14.2 21.1"></path></svg><svg data-shape="pen" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 1433.2px; top: 215.7px; width: 184.3px; height: 101.7px; stroke: rgb(239, 68, 68); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; z-index: 16; transform: translate(0px, 0px);"><path d="M 26.8 5.0 Q 60.0 14.2 91.0 19.9 Q 122.0 25.6 149.5 32.5 Q 177.0 39.4 178.2 41.1 Q 179.3 42.8 175.3 48.6 Q 171.3 54.3 156.4 62.3 Q 141.5 70.4 122.0 77.2 Q 102.5 84.1 72.1 89.9 Q 41.7 95.6 23.9 96.2 Q 6.1 96.7 5.6 95.6 L 5.0 94.4"></path></svg><svg data-shape="pen" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 1494px; top: 266.1px; width: 99.4px; height: 65px; stroke: rgb(239, 68, 68); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; z-index: 17; transform: translate(0px, 0px);"><path d="M 5.0 5.0 Q 15.3 15.3 45.1 37.1 Q 74.9 58.9 83.0 59.5 Q 91.0 60.0 92.7 52.0 L 94.4 44.0"></path></svg><svg data-shape="pen" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 1588px; top: 236.3px; width: 104px; height: 79.9px; stroke: rgb(239, 68, 68); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; z-index: 18; transform: translate(0px, 0px);"><path d="M 5.0 5.0 Q 11.9 9.6 18.8 22.2 Q 25.6 34.8 38.8 50.9 Q 52.0 66.9 61.2 70.9 Q 70.4 74.9 83.0 74.9 Q 95.6 74.9 97.3 65.2 L 99.0 55.5"></path></svg><svg data-shape="pen" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 1654.5px; top: 265px; width: 54.7px; height: 65px; stroke: rgb(239, 68, 68); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; z-index: 19; transform: translate(0px, 0px);"><path d="M 16.5 5.0 Q 5.0 33.7 5.0 44.6 Q 5.0 55.5 10.7 57.7 Q 16.5 60.0 23.3 60.0 Q 30.2 60.0 40.0 57.2 L 49.7 54.3"></path></svg><svg data-shape="pen" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 1594.9px; top: 290.2px; width: 70.8px; height: 112.1px; stroke: rgb(239, 68, 68); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; z-index: 20; transform: translate(0px, 0px);"><path d="M 23.3 77.2 Q 11.9 87.6 8.4 93.3 Q 5.0 99.0 5.6 102.5 Q 6.1 105.9 24.5 106.5 Q 42.8 107.1 51.4 104.8 Q 60.0 102.5 62.9 97.3 Q 65.8 92.1 64.6 69.8 Q 63.5 47.4 55.5 33.1 Q 47.4 18.8 46.9 11.9 L 46.3 5.0"></path></svg><svg data-shape="pen" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 1701.5px; top: 199.6px; width: 12.3px; height: 60.5px; stroke: rgb(239, 68, 68); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; z-index: 21; transform: translate(0px, 0px);"><path d="M 7.3 5.0 Q 7.3 50.9 6.1 53.2 L 5.0 55.5"></path></svg><svg data-shape="pen" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 1827.6px; top: 276.4px; width: 188.9px; height: 59.3px; stroke: rgb(239, 68, 68); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; z-index: 22; transform: translate(120.404px, 1px);"><path d="M 5.0 5.0 Q 116.2 48.6 132.9 51.4 Q 149.5 54.3 158.1 52.0 Q 166.7 49.7 175.3 37.1 L 183.9 24.5"></path></svg><svg data-shape="pen" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 1870.4px; top: 185.8px; width: 76.5px; height: 271.4px; stroke: rgb(239, 68, 68); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; z-index: 23; transform: translate(120.404px, 1px);"><path d="M 6.1 5.0 Q 5.0 81.8 10.2 115.1 Q 15.3 148.3 25.6 177.6 Q 36.0 206.8 46.3 226.3 Q 56.6 245.8 64.1 256.1 L 71.5 266.4"></path></svg><svg data-shape="pen" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="position: absolute; left: 1839.5px; top: 365.9px; width: 121.2px; height: 63.9px; stroke: rgb(239, 68, 68); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; z-index: 24; transform: translate(0px, 0px);"><path d="M 5.0 5.0 Q 30.2 24.5 56.6 36.5 Q 83.0 48.6 99.6 53.7 L 116.2 58.9"></path></svg></section><section class="slide dd-slide dd-metrics" data-editor-slide="true" data-template-pack="midnight-signal" data-screen-label="Metrics" style="--dd-bg:linear-gradient(135deg, #090d1a 0%, #17133b 100%);--dd-surface:rgba(255,255,255,.08);--dd-text:#f5f7ff;--dd-muted:#aab2d5;--dd-accent:#67e8f9;--dd-accent-2:#a78bfa;--dd-border:rgba(255,255,255,.16);--dd-radius:28px;width:1920px;height:1080px;padding:84px 92px;overflow:hidden;position:absolute;background:var(--dd-bg);color:var(--dd-text);font-family:'Inter', 'Pretendard', system-ui, sans-serif;box-sizing:border-box">
+  <div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;z-index:1">
+    <div style="display:flex;justify-content:space-between;align-items:start">
+      <div><div style="font-size:17px;font-weight:700;letter-spacing:.16em;color:var(--dd-accent);margin-bottom:18px">MEASURABLE PROGRESS</div><h2 style="font:inherit;font-size:72px;line-height:1.05;letter-spacing:-.04em;margin:0">Evidence over noise.</h2></div>
+      <span style="font-size:18px;color:var(--dd-muted)">03 / 03</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:28px;flex:1;align-items:center">
+      <article style="height:430px;border:1px solid var(--dd-border);border-radius:var(--dd-radius);background:var(--dd-accent);color:#fff;padding:42px;display:flex;flex-direction:column;justify-content:flex-end;box-sizing:border-box">
+          <div style="font-size:112px;font-weight:850;letter-spacing:-.06em;line-height:1">72%</div><div style="font-size:21px;margin-top:18px;opacity:.72">clarity gained</div>
+        </article><article style="height:350px;border:1px solid var(--dd-border);border-radius:var(--dd-radius);background:var(--dd-surface);color:var(--dd-text);padding:42px;display:flex;flex-direction:column;justify-content:flex-end;box-sizing:border-box">
+          <div style="font-size:82px;font-weight:850;letter-spacing:-.06em;line-height:1">2.4×</div><div style="font-size:21px;margin-top:18px;opacity:.72">faster alignment</div>
+        </article><article style="height: 350px; border: 1px solid var(--dd-border); border-radius: var(--dd-radius); background-image: linear-gradient(135deg, rgb(239, 68, 68), rgb(139, 92, 246)); background-position-x: ; background-position-y: ; background-size: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: rgb(234, 179, 8); color: var(--dd-text); padding: 42px; flex-direction: column; justify-content: flex-end; box-sizing: border-box; z-index: 2;">
+          <div style="font-size:82px;font-weight:850;letter-spacing:-.06em;line-height:1">18</div><div style="font-size:21px;margin-top:18px;opacity:.72">decisions made</div>
+        </article>
+    </div>
+    <div style="height:8px;border-radius:999px;background:linear-gradient(90deg,var(--dd-accent) 0 72%,var(--dd-border) 72% 100%)"></div>
+  </div>
+</section><section class="slide dd-slide dd-overview" data-editor-slide="true" data-template-pack="midnight-signal" data-screen-label="Overview" style="--dd-bg:linear-gradient(135deg, #090d1a 0%, #17133b 100%);--dd-surface:rgba(255,255,255,.08);--dd-text:#f5f7ff;--dd-muted:#aab2d5;--dd-accent:#67e8f9;--dd-accent-2:#a78bfa;--dd-border:rgba(255,255,255,.16);--dd-radius:28px;width:1920px;height:1080px;padding:84px 92px;overflow:hidden;position:absolute;background:var(--dd-bg);color:var(--dd-text);font-family:'Inter', 'Pretendard', system-ui, sans-serif;box-sizing:border-box">
+  <div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;z-index:1">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--dd-border);padding-bottom:34px">
+      <div><div style="font-size:17px;font-weight:700;letter-spacing:.16em;color:var(--dd-accent);margin-bottom:18px">SIGNAL / 2026</div><h2 style="font:inherit;font-size:72px;line-height:1.05;letter-spacing:-.04em;margin:0">Three ideas.<br>One clear direction.</h2></div>
+      <p style="font:inherit;font-size:23px;line-height:1.5;color:var(--dd-muted);width:500px;margin:0">Use this page for an agenda, product pillars, strategic themes or a concise project overview.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;flex:1;align-items:center">
+      <article style="min-height:390px;border:1px solid var(--dd-border);border-radius:var(--dd-radius);background:var(--dd-surface);padding:40px;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box">
+          <span style="font-size:17px;font-weight:800;color:var(--dd-accent)">01</span>
+          <div><h3 style="font:inherit;font-size:40px;margin:0 0 18px">Focus</h3><p style="font:inherit;font-size:20px;line-height:1.55;color:var(--dd-muted);margin:0">Turn complex material into a focused message with a strong visual hierarchy.</p></div>
+        </article><article style="min-height:390px;border:1px solid var(--dd-border);border-radius:var(--dd-radius);background:var(--dd-surface);padding:40px;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box">
+          <span style="font-size:17px;font-weight:800;color:var(--dd-accent-2)">02</span>
+          <div><h3 style="font:inherit;font-size:40px;margin:0 0 18px">Build</h3><p style="font:inherit;font-size:20px;line-height:1.55;color:var(--dd-muted);margin:0">Turn complex material into a focused message with a strong visual hierarchy.</p></div>
+        </article><article style="min-height:390px;border:1px solid var(--dd-border);border-radius:var(--dd-radius);background:var(--dd-surface);padding:40px;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box">
+          <span style="font-size:17px;font-weight:800;color:var(--dd-accent)">03</span>
+          <div><h3 style="font:inherit;font-size:40px;margin:0 0 18px">Scale</h3><p style="font:inherit;font-size:20px;line-height:1.55;color:var(--dd-muted);margin:0">Turn complex material into a focused message with a strong visual hierarchy.</p></div>
+        </article>
+    </div>
+  </div>
+</section></div>
+  <script>
+    (() => {
+      const resize = () => document.documentElement.style.setProperty('--slide-scale', String(Math.min(innerWidth / 1920, innerHeight / 1080)));
+      const slides = [...document.querySelectorAll('.slide')];
+      let index = 0;
+      const show = next => { index = Math.max(0, Math.min(slides.length - 1, next)); slides.forEach((slide, i) => slide.classList.toggle('active', i === index)); };
+      addEventListener('resize', resize); resize();
+      addEventListener('keydown', event => { if (['ArrowRight', 'PageDown', ' '].includes(event.key)) show(index + 1); if (['ArrowLeft', 'PageUp'].includes(event.key)) show(index - 1); });
+    })();
+  </script>
+
+</body></html>
